@@ -249,7 +249,7 @@ $ curl -s localhost:8000/health
 | #2 | `b82de51` | 28 s | 3 s | то же (после слияния PR #6) |
 | #3 | `2d64911` | 36 s | 7 s | `Build image`: заглавные буквы в имени образа GHCR |
 | #4 | `7654651` | 30 s | 48 s | `Scan image with Trivy`: HIGH `zlib1g` в базовом слое |
-| #5 | `4ec96f1` | 27 s | 58 s | `Tag and push image`: двухуровневый путь `ghcr.io/owner/repo/image` |
+| #5 | `4ec96f1` | 27 s | 58 s | `Tag and push image`: путь `ghcr.io/owner/repo/image` недопустим |
 
 На прогоне #5 шаги `Build image`, `Scan image with Trivy` и `Upload Trivy report`
 завершились успешно — то есть сборка и сканирование настроены верно, отказ остался
