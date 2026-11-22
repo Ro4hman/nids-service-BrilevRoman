@@ -9,7 +9,8 @@ COPY pyproject.toml ./
 # Ставим только зависимости: пакет nids в эту ступень не устанавливается,
 # код подключается через PYTHONPATH, иначе заглушка перекрыла бы реальные модули.
 RUN pip install --no-cache-dir --prefix=/install \
-    "scikit-learn>=1.3" "fastapi>=0.110" "uvicorn[standard]>=0.27"
+    "scikit-learn>=1.3" "fastapi>=0.110" "uvicorn[standard]>=0.27" \
+    "psycopg[binary]>=3.1"
 
 ENV PYTHONPATH=/app/src:/install/lib/python3.12/site-packages
 
