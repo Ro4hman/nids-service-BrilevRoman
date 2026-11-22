@@ -1,0 +1,39 @@
+# Стек nids-service одной командой: docker compose up -d --build
+# Переменные берутся из .env (образец — .env.example).
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nids}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
+      POSTGRES_DB: ${POSTGRES_DB:-nids}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Скрипты из migrations/ применяются автоматически при первом
+      # создании каталога данных (пустой том).
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nids} -d ${POSTGRES_DB:-nids}"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    restart: unless-stopped
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-nids}:${POSTGRES_PASSWORD:-devpassword}@db:5432/${POSTGRES_DB:-nids}
+      MODEL_VERSION: ${MODEL_VERSION:-nids-rf-v0.1.0}
+    # Порт публикуется динамически: хост-порт выбирает Docker,
+    # поэтому несколько копий api не конфликтуют между собой.
+    ports:
+      - "8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
