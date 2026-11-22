@@ -28,6 +28,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Обновляем пакеты базового образа: в python:3.12-slim периодически висят
+# уязвимости уровня HIGH с уже выпущенным исправлением в Debian (например,
+# zlib1g CVE-2026-85091). Без этого шага Trivy валит сборку с exit-code 1.
+RUN apt-get update \
+    && apt-get upgrade -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 # Только установленные пакеты из ступени сборки
 COPY --from=builder /install /usr/local
 

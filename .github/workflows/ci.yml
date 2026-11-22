@@ -53,14 +53,15 @@ jobs:
 
       - name: Build image
         run: |
-          IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/nids-service
-          echo "image: $IMAGE"
-          docker build -t "$IMAGE:${{ github.sha }}" -t "$IMAGE:latest" .
+          IMAGE=nids-service
+          echo "scanned locally as $IMAGE:${{ github.sha }}"
+          docker build -t "$IMAGE:${{ github.sha }}" .
 
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ghcr.io/${GITHUB_REPOSITORY,,}/nids-service:${{ github.sha }}
+          # Сканируем локально собранный образ: в реестр он попадает только после скана.
+          image-ref: nids-service:${{ github.sha }}
           format: table
           output: trivy-report.txt
           exit-code: "1"
@@ -74,8 +75,10 @@ jobs:
           name: trivy-report
           path: trivy-report.txt
 
-      - name: Push image
+      - name: Tag and push image
         run: |
           IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/nids-service
+          docker tag "nids-service:${{ github.sha }}" "$IMAGE:${{ github.sha }}"
+          docker tag "nids-service:${{ github.sha }}" "$IMAGE:latest"
           docker push "$IMAGE:${{ github.sha }}"
           docker push "$IMAGE:latest"
