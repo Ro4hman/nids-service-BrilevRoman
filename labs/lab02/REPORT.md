@@ -542,4 +542,5 @@ curl -s localhost:8000/health
 ## 5. Ссылки
 
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
-- PR с отчётом: заполняется после создания Pull Request
+- PR с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/2>
+  (работа ЛР2 вошла в main вместе с веткой `feature/docker`)
