@@ -1,5 +1,7 @@
 # nids-service — сервис обнаружения сетевых вторжений
 
+[![CI](https://github.com/Ro4hman/nids-service-BrilevRoman/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Ro4hman/nids-service-BrilevRoman/actions/workflows/ci.yml)
+
 Сквозной проект курса «Инструментальные средства разработки инфокоммуникационных
 систем с ИИ». Сервис принимает признаки сетевого соединения и возвращает оценку
 вероятности того, что соединение является атакой.

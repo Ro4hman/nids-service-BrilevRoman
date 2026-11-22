@@ -77,7 +77,7 @@ jobs:
 
       - name: Tag and push image
         run: |
-          IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/nids-service
+          IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/nids-service
           docker tag "nids-service:${{ github.sha }}" "$IMAGE:${{ github.sha }}"
           docker tag "nids-service:${{ github.sha }}" "$IMAGE:latest"
           docker push "$IMAGE:${{ github.sha }}"
