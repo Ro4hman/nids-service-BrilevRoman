@@ -94,8 +94,10 @@ curl.exe -s localhost:8000/health
 ```
 
 ```powershell
-curl.exe -s -X POST localhost:8000/predict -H "Content-Type: application/json" `
-  -d '{"src_port":40000,"dst_port":443,"duration_ms":120,"bytes_in":4000,"bytes_out":3000,"packets":20,"protocol":"tcp","service":"https"}'
+$body = '{"src_port":40000,"dst_port":443,"duration_ms":120,"bytes_in":4000,'
+$body += '"bytes_out":3000,"packets":20,"protocol":"tcp","service":"https"}'
+curl.exe -s -X POST localhost:8000/predict `
+  -H "Content-Type: application/json" -d $body
 ```
 
 ```
