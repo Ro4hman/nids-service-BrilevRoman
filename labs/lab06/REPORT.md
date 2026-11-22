@@ -266,19 +266,23 @@ $ git push
 
 ### 2.7. Итоговое состояние пайплайна
 
-После слияния PR #8 в `main` все прогоны завершаются успешно. Хронология прогонов
+После слияния PR #9 в `main` все прогоны завершаются успешно. Хронология прогонов
 CI (данные со страницы Actions и из REST API):
 
 | Прогон | Событие | Ветка | Коммит | Время | Результат |
 |---|---|---|---|---|---|
+| #11 | `push` | `main` | `ebdd476` | 1 m 43 s | success |
+| #10 | `pull_request` | `docs/lab06-ci-runs` | `e5a650f` | 1 m 34 s | success |
 | #9 | `push` | `main` | `1a5353c` | 1 m 40 s | success |
 | #8 | `pull_request` | `docs/lab06-ci-runs` | `68b392e` | 1 m 40 s | success |
 | #7 | `push` | `main` | `41dd392` | 1 m 38 s | success |
 | #6 | `pull_request` | `fix/ci-ghcr-image` | `2fd78fa` | 1 m 33 s | success |
 | #5 | `push` | `main` | `4ec96f1` | 1 m 11 s | success |
 
-PR #8 (`docs/lab06-ci-runs`) слит в `main` коммитом `1a5353c`, после чего на `main`
-автоматически стартовал финальный прогон #9 — тоже зелёный. Это подтверждает главное
+Правка отчёта шла через PR #9 (`docs/lab06-ci-runs`): прогон #10 на событие
+`pull_request` (коммит `e5a650f`, 1 m 34 s) прошёл зелёным, после слияния PR #9 в `main`
+коммитом `ebdd476` автоматически стартовал прогон #11 (1 m 43 s) — тоже зелёный.
+Цепочка `PR → merge → push в main` отработала полностью, что подтверждает главное
 свойство настроенного пайплайна: он срабатывает не только на PR, но и на каждый коммит,
 попавший в `main`.
 
@@ -418,5 +422,5 @@ API отвечает правильной структурой, все конт�
 - Прогоны CI: <https://github.com/Ro4hman/nids-service-BrilevRoman/actions/workflows/ci.yml>
 - PR с исправлением публикации образа (слит):
   <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/7>
-- PR с отчётом по лабораторной работе №6 (слит):
-  <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/8>
+- PR с отчётом по лабораторной работе №6 (слит, коммит слияния `ebdd476`):
+  <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/9>
