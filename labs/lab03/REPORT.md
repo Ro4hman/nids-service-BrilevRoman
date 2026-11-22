@@ -441,4 +441,4 @@ Git, виртуальные окружения, датасеты и секрет
 
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
 - Ветка с работой: <https://github.com/Ro4hman/nids-service-BrilevRoman/tree/feature/docker>
-- Pull Request с отчётом: <!-- PR-LINK -->
+- Pull Request с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/2>
