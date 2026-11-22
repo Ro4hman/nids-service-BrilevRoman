@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-nids}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
       POSTGRES_DB: ${POSTGRES_DB:-nids}
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -55,7 +55,7 @@ services:
     build: .
     restart: unless-stopped
     environment:
-      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-nids}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-nids}
       MODEL_VERSION: ${MODEL_VERSION:-nids-rf-v0.1.0}
     ports:
       - "8000"
