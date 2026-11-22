@@ -28,8 +28,12 @@ def _connection(rng: random.Random, idx: int) -> list:
     service = rng.choice(SERVICES)
     base_duration = {"normal": 120, "dos": 900, "probe": 60, "r2l": 300}[label]
     duration = max(1, int(rng.gauss(base_duration, base_duration * 0.25)))
-    bytes_in = max(0, int(rng.gauss({"normal": 4000, "dos": 200, "probe": 800, "r2l": 1500}[label], 500)))
-    bytes_out = max(0, int(rng.gauss({"normal": 3000, "dos": 15000, "probe": 300, "r2l": 600}[label], 900)))
+    bytes_in = max(0, int(rng.gauss(
+        {"normal": 4000, "dos": 200, "probe": 800, "r2l": 1500}[label], 500
+    )))
+    bytes_out = max(0, int(rng.gauss(
+        {"normal": 3000, "dos": 15000, "probe": 300, "r2l": 600}[label], 900
+    )))
     packets = max(1, int(rng.gauss({"normal": 20, "dos": 120, "probe": 5, "r2l": 12}[label], 4)))
     state = rng.choices(STATES, weights=[10, 75, 15])[0]
     if label == "dos":
