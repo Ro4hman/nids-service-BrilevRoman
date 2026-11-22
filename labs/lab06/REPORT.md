@@ -266,27 +266,34 @@ $ git push
 
 ### 2.7. Итоговое состояние пайплайна
 
-После слияния PR #7 (`41dd392`) все прогоны завершаются успешно. Список прогонов со
-страницы Actions репозитория:
+После слияния PR #8 в `main` все прогоны завершаются успешно. Хронология прогонов
+CI (данные со страницы Actions и из REST API):
 
 | Прогон | Событие | Ветка | Коммит | Время | Результат |
 |---|---|---|---|---|---|
-| `45037387535` | `push` | `main` | `41dd392` | 1 m 38 s | success |
-| `45037178111` | `pull_request` | `fix/ci-ghcr-image` | `2fd78fa` | 1 m 33 s | success |
-| `45034889035` | `push` | `main` | `4ec96f1` | 1 m 11 s | success |
+| #9 | `push` | `main` | `1a5353c` | 1 m 40 s | success |
+| #8 | `pull_request` | `docs/lab06-ci-runs` | `68b392e` | 1 m 40 s | success |
+| #7 | `push` | `main` | `41dd392` | 1 m 38 s | success |
+| #6 | `pull_request` | `fix/ci-ghcr-image` | `2fd78fa` | 1 m 33 s | success |
+| #5 | `push` | `main` | `4ec96f1` | 1 m 11 s | success |
+
+PR #8 (`docs/lab06-ci-runs`) слит в `main` коммитом `1a5353c`, после чего на `main`
+автоматически стартовал финальный прогон #9 — тоже зелёный. Это подтверждает главное
+свойство настроенного пайплайна: он срабатывает не только на PR, но и на каждый коммит,
+попавший в `main`.
 
 Разбивка по job-ам последнего прогона:
 
 ```
-lint and test                 30 s   success
+lint and test                 31 s   success
   Install dependencies / Lint / Test
-build and publish image       63 s   success
+build and publish image       64 s   success
   Log in to GHCR / Build image / Scan image with Trivy
   Upload Trivy report / Tag and push image
 ```
 
 Итого два job-а идут последовательно (`needs: test`), поэтому общее время меньше суммы
-времени job-ов: 30 + 63 = 93 s при 98 s общего времени прогона — остальное уходит на
+времени job-ов: 31 + 64 = 95 s при 100 s общего времени прогона — остальное уходит на
 запуск и завершение runner-а. Прогон на `pull_request` занимает столько же, сколько на
 `push`, потому что workflow не различает события: job `build and publish image`
 выполняется и там, и образ с тегом `latest` публикуется в обоих случаях. Для учебного
@@ -409,6 +416,7 @@ API отвечает правильной структурой, все конт�
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
 - Workflow: <https://github.com/Ro4hman/nids-service-BrilevRoman/blob/main/.github/workflows/ci.yml>
 - Прогоны CI: <https://github.com/Ro4hman/nids-service-BrilevRoman/actions/workflows/ci.yml>
-- Ветка с исправлением публикации образа:
-  <https://github.com/Ro4hman/nids-service-BrilevRoman/tree/fix/ci-ghcr-image>
-- PR с отчётом: _заполняется после создания Pull Request_
+- PR с исправлением публикации образа (слит):
+  <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/7>
+- PR с отчётом по лабораторной работе №6 (слит):
+  <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/8>
