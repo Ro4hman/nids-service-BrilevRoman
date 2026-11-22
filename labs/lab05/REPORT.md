@@ -423,4 +423,4 @@ compose. Достаточно оставить `expose`/внутренний п�
 
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
 - Ветка с работой: `feature/compose`
-- PR с отчётом: _заполняется после создания PR_
+- PR с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/4>
