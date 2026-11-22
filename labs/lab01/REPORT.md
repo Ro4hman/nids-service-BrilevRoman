@@ -415,7 +415,5 @@ divergence, а принудительный push перезапишет чужи
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
 - PR с документацией (`feature/readme` → `main`):
   <https://github.com/Ro4hman/nids-service-BrilevRoman/compare/main...feature/readme>
-- PR с настоящим отчётом (`docs/lab01-report` → `main`): <!-- PR-LINK -->
-  `https://github.com/Ro4hman/nids-service-BrilevRoman/pull/__НОМЕР__`
-  (ссылка на создание:
-  <https://github.com/Ro4hman/nids-service-BrilevRoman/compare/main...docs/lab01-report>)
+- PR с отчётом (`docs/lab01-report` → `main`):
+  <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/1>
