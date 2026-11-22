@@ -55,7 +55,7 @@ services:
     build: .
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-nids}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-nids}
+      DATABASE_URL: ${DATABASE_URL}
       MODEL_VERSION: ${MODEL_VERSION:-nids-rf-v0.1.0}
     ports:
       - "8000"

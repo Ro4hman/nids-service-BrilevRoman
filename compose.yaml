@@ -24,7 +24,7 @@ services:
   api:
     build: .
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-nids}:${POSTGRES_PASSWORD:-devpassword}@db:5432/${POSTGRES_DB:-nids}
+      DATABASE_URL: ${DATABASE_URL}
       MODEL_VERSION: ${MODEL_VERSION:-nids-rf-v0.1.0}
     # Порт публикуется динамически: хост-порт выбирает Docker,
     # поэтому несколько копий api не конфликтуют между собой.
