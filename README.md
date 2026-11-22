@@ -1,4 +1,5 @@
-# nids-service
+# nids-service — NIDS Service (сборки Alpha и Beta)
+# NIDS Service — демонстрационный стенд Beta
 
 **NIDS-service** — учебный сервис обнаружения сетевых вторжений (Network Intrusion
 Detection System) со сквозным жизненным циклом разработки.
