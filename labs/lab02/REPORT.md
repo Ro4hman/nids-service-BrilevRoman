@@ -542,5 +542,5 @@ curl -s localhost:8000/health
 ## 5. Ссылки
 
 - Репозиторий проекта: <https://github.com/Ro4hman/nids-service-BrilevRoman>
-- PR с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/2>
-  (работа ЛР2 вошла в main вместе с веткой `feature/docker`)
+- Ветка с работой: <https://github.com/Ro4hman/nids-service-BrilevRoman/tree/feat/lab02-linux-env>
+- PR с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/5>
