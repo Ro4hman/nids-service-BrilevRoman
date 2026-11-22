@@ -76,11 +76,59 @@ pytest
 результат воспроизводим: при том же seed повторный запуск `python -m nids.train`
 даёт те же числа.
 
-## Переменные окружения
+## База данных: журнал предсказаний
+
+Каждое предсказание записывается в PostgreSQL — это журнал для последующей аналитики.
+База поднимается отдельным контейнером `nids-db`.
+
+### Запуск базы
+
+```bash
+docker run -d --name nids-db \
+  -e POSTGRES_PASSWORD=devpassword \
+  -e POSTGRES_USER=nids \
+  -e POSTGRES_DB=nids \
+  -p 5432:5432 \
+  -v nids-pgdata:/var/lib/postgresql/data \
+  postgres:16-alpine
+
+docker exec nids-db psql -U nids -d nids -c "SELECT version();"
+```
+
+Важен ключ `-v nids-pgdata:/var/lib/postgresql/data`: без него данные живут в
+слое контейнера и исчезают при его пересоздании.
+
+### Миграции
+
+```bash
+docker exec -i nids-db psql -U nids -d nids < migrations/001_create_predictions.sql
+docker exec -i nids-db psql -U nids -d nids < migrations/002_index_created_at.sql
+docker exec nids-db psql -U nids -d nids -c "\d predictions"
+```
+
+`002_index_created_at.sql` создаёт индекс по `created_at` — он ускоряет выборки
+журнала за период и сортировку по времени.
+
+### Нагрузочная проверка и аналитика
+
+```bash
+export DATABASE_URL="postgresql://nids:devpassword@localhost:5432/nids"
+python scripts/load.py --n 500
+```
+
+Скрипт отправляет запросы на `/predict` по строкам `data/connections.csv` и печатает
+число ошибок, длительность, `rps` и распределение предсказанных меток.
+
+### Переменные окружения
 
 | Переменная | По умолчанию | Назначение |
 |---|---|---|
 | `MODEL_DIR` | `artifacts` | каталог, где ищется `model.pkl` |
+| `MODEL_VERSION` | `nids-rf-v0.1.0` | версия модели в журнале предсказаний |
+| `DATABASE_URL` | — | строка подключения к PostgreSQL; без неё сервис работает, но журнал не пишется |
+
+Образец переменных — `.env.example`. Реальный `.env` с паролями в репозиторий не
+попадает: он указан в `.gitignore`.
 
 Пригодится, когда артефакты подключаются томом в контейнер.
 
