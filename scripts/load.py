@@ -47,7 +47,7 @@ def main() -> int:
     errors = 0
     started = time.perf_counter()
 
-    for i in range(args.n):
+    for _ in range(args.n):
         body = json.dumps(payload(random.choice(rows))).encode()
         req = urllib.request.Request(
             f"{args.url}/predict",

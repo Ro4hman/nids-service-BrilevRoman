@@ -1,7 +1,7 @@
 """Заготовка HTTP-сервиса NIDS (только стандартная библиотека Python)."""
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 HOST = "127.0.0.1"
 PORT = 8000
@@ -23,7 +23,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json(404, {"error": "not found"})
 
     def log_message(self, format: str, *args) -> None:
-        print("%s - %s" % (self.address_string(), format % args))
+        print(f"{self.address_string()} - {format % args}")
 
 
 def main() -> None:
