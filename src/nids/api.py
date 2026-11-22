@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import pickle
 from pathlib import Path
 
@@ -11,7 +12,10 @@ from pydantic import BaseModel
 from nids import PROTOCOLS, SERVICES
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = ROOT / "artifacts" / "model.pkl"
+# Путь к каталогу с моделью можно переопределить переменной окружения MODEL_DIR
+# (в контейнере модель обычно подключают томом в /models).
+MODEL_DIR = Path(os.environ.get("MODEL_DIR", ROOT / "artifacts"))
+MODEL_PATH = MODEL_DIR / "model.pkl"
 
 app = FastAPI(title="nids-service", version="0.1.0")
 _model = None

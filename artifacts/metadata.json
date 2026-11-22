@@ -1,0 +1,20 @@
+{
+  "model": "RandomForestClassifier",
+  "n_estimators": 100,
+  "random_state": 42,
+  "n_samples": 500,
+  "n_train": 375,
+  "n_test": 125,
+  "features": [
+    "src_port",
+    "dst_port",
+    "duration_ms",
+    "bytes_in",
+    "bytes_out",
+    "packets",
+    "proto_code",
+    "service_code"
+  ],
+  "accuracy": 0.992,
+  "f1_macro": 0.9557
+}
