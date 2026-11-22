@@ -596,4 +596,4 @@ Git и останется в истории навсегда, даже посл�
 - Репозиторий: <https://github.com/Ro4hman/nids-service-BrilevRoman>
 - Ветка с работой: <https://github.com/Ro4hman/nids-service-BrilevRoman/tree/feature/database>
 - Миграции: `migrations/001_create_predictions.sql`, `migrations/002_index_created_at.sql`
-- PR с отчётом: <!-- PR-LINK -->
+- PR с отчётом: <https://github.com/Ro4hman/nids-service-BrilevRoman/pull/3>
